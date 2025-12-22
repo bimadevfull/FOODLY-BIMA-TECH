@@ -8,14 +8,13 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
 import time
-import json
 from typing import Dict, List
 
 # ============================================================
 # CONFIGURAÇÕES DA PÁGINA
 # ============================================================
 
-st.set_page_config(
+st. set_page_config(
     page_title="Foodly - Delivery",
     page_icon="🍔",
     layout="wide",
@@ -28,49 +27,44 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Estilo principal */
     .main {
         background-color: #f8f9fa;
     }
     
-    /* Cards de produtos */
     .product-card {
         background: white;
         padding: 20px;
-        border-radius:  10px;
+        border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         margin: 10px 0;
         transition: transform 0.3s;
     }
     
-    . product-card:hover {
+    .product-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     
-    /* Botões personalizados */
-    .stButton>button {
+    . stButton>button {
         width: 100%;
         border-radius: 5px;
         font-weight: bold;
     }
     
-    /* Títulos */
     h1, h2, h3 {
-        color: #2c3e50;
+        color:  #2c3e50;
     }
     
-    /* Badges */
     .badge {
         display: inline-block;
         padding: 5px 10px;
         border-radius: 20px;
-        font-size: 12px;
+        font-size:  12px;
         font-weight:  bold;
         margin: 5px;
     }
     
-    . badge-success {
+    .badge-success {
         background-color:  #28a745;
         color: white;
     }
@@ -80,17 +74,16 @@ st.markdown("""
         color: black;
     }
     
-    . badge-danger {
+    .badge-danger {
         background-color: #dc3545;
         color: white;
     }
     
-    /* Status do pedido */
     .status-card {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background:  linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         padding: 20px;
-        border-radius:  10px;
+        border-radius: 10px;
         margin: 10px 0;
     }
 </style>
@@ -126,7 +119,7 @@ class Produto:
 
 
 class ItemCarrinho:
-    def __init__(self, produto: Produto, quantidade: int, observacoes:  str = ""):
+    def __init__(self, produto: Produto, quantidade: int, observacoes: str = ""):
         self.produto = produto
         self.quantidade = quantidade
         self.observacoes = observacoes
@@ -155,14 +148,14 @@ class Pedido:
             return self.calcular_subtotal() * 0.10
         elif self.cupom == "PRIMEIRA": 
             return self.calcular_subtotal() * 0.15
-        elif self.cupom == "FRETEGRATIS": 
+        elif self.cupom == "FRETEGRATIS":
             return self.frete
         elif self.cupom == "NATAL25":
             return self.calcular_subtotal() * 0.25
         return 0
     
     def calcular_total(self):
-        return self.calcular_subtotal() + self.frete - self.calcular_desconto()
+        return self. calcular_subtotal() + self.frete - self.calcular_desconto()
     
     def tempo_estimado(self):
         tempo_preparo = max(item.produto.tempo_preparo for item in self.itens)
@@ -180,7 +173,7 @@ def carregar_produtos():
         # PIZZAS
         Produto(1, "Pizza Margherita", "Pizzas", 45.90, 
                 "Molho de tomate, mussarela, manjericão e azeite", 
-                "🍕", 4. 8, 35),
+                "🍕", 4.8, 35),
         Produto(2, "Pizza Calabresa", "Pizzas", 49.90,
                 "Calabresa, cebola, mussarela e azeitonas",
                 "🍕", 4.7, 35),
@@ -267,26 +260,24 @@ def inicializar_session_state():
     if 'endereco_selecionado' not in st. session_state:
         st. session_state.endereco_selecionado = None
     
-    if 'pedido_atual' not in st.session_state:
-        st.session_state.pedido_atual = None
+    if 'pedido_atual' not in st. session_state:
+        st. session_state.pedido_atual = None
 
 
 # ============================================================
 # FUNÇÕES DO CARRINHO
 # ============================================================
 
-def adicionar_ao_carrinho(produto:  Produto, quantidade: int, observacoes: str = ""):
+def adicionar_ao_carrinho(produto: Produto, quantidade: int, observacoes: str = ""):
     """Adiciona produto ao carrinho"""
-    # Verifica se o produto já está no carrinho
-    for item in st.session_state.carrinho:
-        if item.produto. id == produto.id:
+    for item in st.session_state. carrinho:
+        if item. produto.id == produto.id:
             item.quantidade += quantidade
             st.success(f"✅ {quantidade}x {produto.nome} adicionado(s) ao carrinho!")
             return
     
-    # Se não está, adiciona novo item
     novo_item = ItemCarrinho(produto, quantidade, observacoes)
-    st.session_state.carrinho.append(novo_item)
+    st.session_state. carrinho.append(novo_item)
     st.success(f"✅ {quantidade}x {produto.nome} adicionado(s) ao carrinho!")
 
 
@@ -313,13 +304,12 @@ def calcular_total_carrinho():
 
 def pagina_home():
     """Página principal do app"""
-    # Banner principal
     st.markdown("""
-    <div style='background:  linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                 padding: 40px; border-radius: 10px; margin-bottom: 30px; text-align: center;'>
-        <h1 style='color: white; margin: 0;'>🍔 FOODLY</h1>
+        <h1 style='color:  white; margin: 0;'>🍔 FOODLY</h1>
         <p style='color: white; font-size: 20px; margin: 10px 0;'>
-            Seu delivery favorito chegou! 🚀
+            Seu delivery favorito chegou!  🚀
         </p>
         <p style='color: white; margin: 0;'>
             Entrega rápida • Cupons de desconto • Avaliações reais
@@ -327,7 +317,6 @@ def pagina_home():
     </div>
     """, unsafe_allow_html=True)
     
-    # Estatísticas
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
@@ -344,7 +333,6 @@ def pagina_home():
     
     st.divider()
     
-    # Cupons em destaque
     st.subheader("🎉 Cupons Disponíveis")
     
     cupons_cols = st.columns(4)
@@ -361,30 +349,29 @@ def pagina_home():
     
     st.divider()
     
-    # Categorias
     st.subheader("📋 Categorias")
     
     cat_col1, cat_col2, cat_col3, cat_col4 = st. columns(4)
     
     with cat_col1:
         if st.button("🍕 Pizzas", use_container_width=True):
-            st.session_state.categoria_filtro = "Pizzas"
+            st.session_state.pagina = "Cardápio"
             st.rerun()
     
     with cat_col2:
         if st.button("🍔 Hambúrgueres", use_container_width=True):
-            st.session_state.categoria_filtro = "Hambúrgueres"
+            st.session_state.pagina = "Cardápio"
             st.rerun()
     
     with cat_col3:
-        if st.button("🥤 Bebidas", use_container_width=True):
-            st.session_state.categoria_filtro = "Bebidas"
+        if st. button("🥤 Bebidas", use_container_width=True):
+            st.session_state.pagina = "Cardápio"
             st.rerun()
     
     with cat_col4:
         if st.button("🍰 Sobremesas", use_container_width=True):
-            st.session_state.categoria_filtro = "Sobremesas"
-            st. rerun()
+            st.session_state. pagina = "Cardápio"
+            st.rerun()
 
 
 # ============================================================
@@ -397,12 +384,11 @@ def pagina_cardapio():
     
     produtos = carregar_produtos()
     
-    # Filtros
     col1, col2, col3 = st.columns([2, 2, 1])
     
     with col1:
         categorias = ["Todas"] + list(set(p.categoria for p in produtos))
-        categoria_selecionada = st.selectbox("Categoria", categorias)
+        categoria_selecionada = st. selectbox("Categoria", categorias)
     
     with col2:
         ordem = st.selectbox("Ordenar por", 
@@ -413,17 +399,15 @@ def pagina_cardapio():
         st.write("")
         mostrar_favoritos = st.checkbox("❤️ Favoritos")
     
-    # Aplicar filtros
     produtos_filtrados = produtos
     
-    if categoria_selecionada != "Todas": 
+    if categoria_selecionada != "Todas":
         produtos_filtrados = [p for p in produtos_filtrados if p.categoria == categoria_selecionada]
     
     if mostrar_favoritos:
         produtos_filtrados = [p for p in produtos_filtrados 
                             if p.id in st.session_state.favoritos]
     
-    # Ordenar
     if ordem == "Menor preço":
         produtos_filtrados.sort(key=lambda x: x.preco)
     elif ordem == "Maior preço":
@@ -433,12 +417,10 @@ def pagina_cardapio():
     
     st.divider()
     
-    # Exibir produtos
     if not produtos_filtrados:
         st.warning("Nenhum produto encontrado com os filtros selecionados.")
         return
     
-    # Grid de produtos (2 por linha)
     for i in range(0, len(produtos_filtrados), 2):
         cols = st.columns(2)
         
@@ -446,28 +428,24 @@ def pagina_cardapio():
             if i + j < len(produtos_filtrados):
                 produto = produtos_filtrados[i + j]
                 
-                with cols[j]:
-                    # Card do produto
+                with cols[j]: 
                     with st.container():
                         st.markdown(f"### {produto.imagem} {produto.nome}")
                         
-                        # Avaliação
                         estrelas = "⭐" * int(produto.avaliacao)
                         st.markdown(f"{estrelas} {produto.avaliacao}")
                         
-                        st.write(produto.descricao)
+                        st. write(produto.descricao)
                         
-                        # Preço e tempo
-                        col_preco, col_tempo = st. columns(2)
+                        col_preco, col_tempo = st.columns(2)
                         with col_preco:
                             st.markdown(f"**R$ {produto.preco:.2f}**")
                         with col_tempo:
                             st.markdown(f"🕒 {produto.tempo_preparo} min")
                         
-                        # Botões
                         col_fav, col_qtd, col_add = st.columns([1, 2, 2])
                         
-                        with col_fav:
+                        with col_fav: 
                             is_favorito = produto. id in st.session_state. favoritos
                             if st.button("❤️" if is_favorito else "🤍", 
                                        key=f"fav_{produto.id}",
@@ -478,9 +456,9 @@ def pagina_cardapio():
                                     st.session_state.favoritos.append(produto.id)
                                 st.rerun()
                         
-                        with col_qtd:
+                        with col_qtd: 
                             quantidade = st.number_input("Qtd", min_value=1, max_value=10, 
-                                                       value=1, key=f"qtd_{produto. id}",
+                                                       value=1, key=f"qtd_{produto.id}",
                                                        label_visibility="collapsed")
                         
                         with col_add: 
@@ -488,12 +466,6 @@ def pagina_cardapio():
                                        use_container_width=True):
                                 adicionar_ao_carrinho(produto, quantidade)
                                 st.rerun()
-                        
-                        # Observações (expansível)
-                        with st.expander("📝 Adicionar observações"):
-                            obs = st.text_area("Observações para este item",
-                                             key=f"obs_{produto.id}",
-                                             placeholder="Ex: sem cebola, ponto da carne bem passado...")
                     
                     st.divider()
 
@@ -507,13 +479,12 @@ def pagina_carrinho():
     st.title("🛒 Meu Carrinho")
     
     if not st.session_state.carrinho:
-        st.info("Seu carrinho está vazio.  Que tal adicionar alguns produtos deliciosos?  🍕")
+        st. info("Seu carrinho está vazio.  Que tal adicionar alguns produtos deliciosos?  🍕")
         if st.button("🛍️ Ver Cardápio"):
-            st.session_state.pagina = "Cardápio"
-            st. rerun()
+            st.session_state. pagina = "Cardápio"
+            st.rerun()
         return
     
-    # Itens do carrinho
     st.subheader("📦 Itens")
     
     for idx, item in enumerate(st.session_state.carrinho):
@@ -529,7 +500,7 @@ def pagina_carrinho():
                 st.write(f"x{item.quantidade}")
             
             with col3:
-                st.write(f"R$ {item. subtotal():.2f}")
+                st.write(f"R$ {item.subtotal():.2f}")
             
             with col4:
                 if st.button("🗑️", key=f"remove_{idx}", help="Remover"):
@@ -538,13 +509,11 @@ def pagina_carrinho():
             
             st.divider()
     
-    # Resumo do pedido
     st.subheader("💰 Resumo do Pedido")
     
     subtotal = calcular_total_carrinho()
     frete = 5.00
     
-    # Cupom de desconto
     col1, col2 = st. columns([3, 1])
     
     with col1:
@@ -562,7 +531,6 @@ def pagina_carrinho():
             else:
                 st.error("❌ Cupom inválido")
     
-    # Cálculo do desconto
     desconto = 0
     if hasattr(st.session_state, 'cupom_aplicado'):
         cupom_info = carregar_cupons()[st.session_state.cupom_aplicado]
@@ -571,7 +539,6 @@ def pagina_carrinho():
         elif cupom_info['tipo'] == 'frete':
             desconto = frete
     
-    # Exibir valores
     st.markdown(f"""
     | Item | Valor |
     |------|-------|
@@ -583,8 +550,7 @@ def pagina_carrinho():
     
     st.divider()
     
-    # Botões de ação
-    col1, col2 = st.columns(2)
+    col1, col2 = st. columns(2)
     
     with col1:
         if st.button("🗑️ Limpar Carrinho", use_container_width=True):
@@ -611,7 +577,6 @@ def pagina_checkout():
         st.warning("Seu carrinho está vazio!")
         return
     
-    # Etapa 1: Endereço
     st.subheader("1️⃣ Endereço de Entrega")
     
     endereco = st.text_input("Rua e número", placeholder="Ex: Rua das Flores, 123")
@@ -629,7 +594,6 @@ def pagina_checkout():
     
     st.divider()
     
-    # Etapa 2: Forma de pagamento
     st.subheader("2️⃣ Forma de Pagamento")
     
     forma_pagamento = st.radio(
@@ -644,7 +608,6 @@ def pagina_checkout():
     
     st.divider()
     
-    # Resumo final
     st.subheader("3️⃣ Resumo do Pedido")
     
     subtotal = calcular_total_carrinho()
@@ -660,14 +623,12 @@ def pagina_checkout():
     
     total = subtotal + frete - desconto
     
-    # Exibir itens
     st.markdown("**Itens do pedido:**")
     for item in st.session_state.carrinho:
         st.write(f"• {item.quantidade}x {item.produto.nome} - R$ {item.subtotal():.2f}")
     
     st.divider()
     
-    # Valores
     col1, col2 = st. columns(2)
     
     with col1:
@@ -686,19 +647,16 @@ def pagina_checkout():
     
     st.divider()
     
-    # Tempo estimado
     tempo_preparo = max(item.produto.tempo_preparo for item in st.session_state.carrinho)
     tempo_entrega = 30
     tempo_total = tempo_preparo + tempo_entrega
     
     st.info(f"⏰ Tempo estimado de entrega: **{tempo_total} minutos**")
     
-    # Botão confirmar
     if st.button("🚀 Confirmar Pedido", type="primary", use_container_width=True):
         if not endereco or not bairro or not cidade:
             st.error("❌ Por favor, preencha o endereço completo!")
         else:
-            # Criar pedido
             cupom_usado = st.session_state.cupom_aplicado if hasattr(st.session_state, 'cupom_aplicado') else None
             pedido = Pedido(
                 id=len(st.session_state.pedidos) + 1,
@@ -708,12 +666,12 @@ def pagina_checkout():
                 cupom=cupom_usado
             )
             
-            st. session_state.pedidos.append(pedido)
+            st.session_state.pedidos.append(pedido)
             st.session_state.pedido_atual = pedido
             limpar_carrinho()
             
             if hasattr(st.session_state, 'cupom_aplicado'):
-                delattr(st. session_state, 'cupom_aplicado')
+                delattr(st.session_state, 'cupom_aplicado')
             
             st.session_state.pagina = "Acompanhar"
             st.rerun()
@@ -727,37 +685,33 @@ def pagina_acompanhar():
     """Página de acompanhamento do pedido"""
     st.title("📦 Acompanhar Pedido")
     
-    if not st.session_state. pedido_atual:
+    if not st.session_state.pedido_atual:
         st.warning("Você ainda não fez nenhum pedido.")
         return
     
     pedido = st.session_state. pedido_atual
     
-    # Banner de sucesso
     st.success("🎉 Pedido confirmado com sucesso!")
     
-    # Informações do pedido
-    st. markdown(f"""
+    st.markdown(f"""
     <div class='status-card'>
         <h2 style='margin: 0; color: white;'>Pedido #{pedido.id}</h2>
         <p style='margin: 10px 0; font-size: 18px;'>
             Status: <strong>{pedido.status}</strong>
         </p>
-        <p style='margin:  0;'>
-            ⏰ Tempo estimado: <strong>{pedido.tempo_estimado()} minutos</strong>
+        <p style='margin: 0;'>
+            ⏰ Tempo estimado:  <strong>{pedido.tempo_estimado()} minutos</strong>
         </p>
     </div>
     """, unsafe_allow_html=True)
     
     st.divider()
     
-    # Linha do tempo do pedido
     st.subheader("📍 Status da Entrega")
     
     status_options = ["Confirmado", "Preparando", "Saiu para entrega", "Entregue"]
     
-    # Simular progresso (em produção, isso viria do backend)
-    progress = status_options.index(pedido. status) if pedido.status in status_options else 0
+    progress = status_options.index(pedido. status) if pedido.status in status_options else 1
     
     for idx, status in enumerate(status_options):
         if idx <= progress:
@@ -765,9 +719,8 @@ def pagina_acompanhar():
         else:
             st.markdown(f"⭕ {status}")
     
-    # Botão para simular mudança de status (apenas para demo)
     if pedido.status != "Entregue":
-        if st. button("⏭️ Avançar Status (Demo)", help="Apenas para demonstração"):
+        if st.button("⏭️ Avançar Status (Demo)", help="Apenas para demonstração"):
             current_idx = status_options.index(pedido.status)
             if current_idx < len(status_options) - 1:
                 pedido.status = status_options[current_idx + 1]
@@ -775,25 +728,23 @@ def pagina_acompanhar():
     
     st.divider()
     
-    # Detalhes do pedido
     st.subheader("📋 Detalhes do Pedido")
     
-    col1, col2 = st. columns(2)
+    col1, col2 = st.columns(2)
     
     with col1:
-        st. markdown("**Itens:**")
+        st.markdown("**Itens:**")
         for item in pedido.itens:
-            st.write(f"• {item.quantidade}x {item.produto.nome}")
+            st. write(f"• {item. quantidade}x {item.produto.nome}")
     
     with col2:
         st.markdown("**Entrega:**")
         st.write(f"📍 {pedido.endereco}")
         st.write(f"💳 {pedido.forma_pagamento}")
-        st.write(f"💰 R$ {pedido. calcular_total():.2f}")
+        st.write(f"💰 R$ {pedido.calcular_total():.2f}")
     
     st.divider()
     
-    # Se entregue, mostrar avaliação
     if pedido.status == "Entregue":
         st.subheader("⭐ Avalie seu pedido")
         
@@ -817,7 +768,6 @@ def pagina_historico():
         st.info("Você ainda não fez nenhum pedido.")
         return
     
-    # Listar todos os pedidos
     for pedido in reversed(st.session_state.pedidos):
         with st.expander(f"Pedido #{pedido.id} - {pedido.data. strftime('%d/%m/%Y %H:%M')} - R$ {pedido.calcular_total():.2f}"):
             st.markdown(f"**Status:** {pedido.status}")
@@ -844,7 +794,6 @@ def pagina_historico():
             if pedido.cupom:
                 st.success(f"💎 Cupom aplicado: {pedido.cupom} (-R$ {pedido.calcular_desconto():.2f})")
             
-            # Botão para ver detalhes
             if st.button(f"👁️ Ver detalhes", key=f"ver_{pedido.id}"):
                 st.session_state.pedido_atual = pedido
                 st.session_state.pagina = "Acompanhar"
@@ -858,20 +807,15 @@ def pagina_historico():
 def sidebar_menu():
     """Menu lateral do app"""
     with st.sidebar:
-        st. image("https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Food/Hamburger.png", 
-                 width=100)
-        
-        st.title("FOODLY")
+        st. markdown("# 🍔 FOODLY")
         
         st.divider()
         
-        # Menu de navegação
         menu_options = {
             "Home": "🏠",
             "Cardápio": "📋",
             "Carrinho": "🛒",
-            "Acompanhar": "📦",
-            "Histórico":  "📜",
+            "Histórico": "📜",
         }
         
         for pagina, icone in menu_options.items():
@@ -882,7 +826,6 @@ def sidebar_menu():
         
         st.divider()
         
-        # Informações do carrinho
         if st.session_state.carrinho:
             qtd_itens = sum(item.quantidade for item in st.session_state.carrinho)
             total = calcular_total_carrinho()
@@ -894,14 +837,9 @@ def sidebar_menu():
         
         st.divider()
         
-        # Rodapé
-        st.caption("📞 Atendimento: (11) 99999-9999")
+        st.caption("📞 Atendimento:  (11) 99999-9999")
         st.caption("📧 contato@foodly.com")
         st.caption("🕒 Seg-Dom:  10h às 23h")
-        
-        st. divider()
-        
-        st.caption("Feito com ❤️ usando Streamlit")
 
 
 # ============================================================
@@ -911,34 +849,26 @@ def sidebar_menu():
 def main():
     """Função principal do aplicativo"""
     
-    # Inicializar session state
     inicializar_session_state()
     
-    # Página padrão
-    if 'pagina' not in st. session_state:
-        st. session_state.pagina = "Home"
+    if 'pagina' not in st.session_state:
+        st.session_state.pagina = "Home"
     
-    # Menu lateral
     sidebar_menu()
     
-    # Roteamento de páginas
     if st.session_state.pagina == "Home":
         pagina_home()
     elif st.session_state.pagina == "Cardápio":
         pagina_cardapio()
-    elif st.session_state. pagina == "Carrinho": 
+    elif st.session_state.pagina == "Carrinho": 
         pagina_carrinho()
-    elif st.session_state.pagina == "Checkout":
+    elif st.session_state. pagina == "Checkout":
         pagina_checkout()
     elif st.session_state.pagina == "Acompanhar":
         pagina_acompanhar()
     elif st.session_state.pagina == "Histórico":
         pagina_historico()
 
-
-# ============================================================
-# EXECUTAR APP
-# ============================================================
 
 if __name__ == "__main__": 
     main()
