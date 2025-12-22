@@ -161,27 +161,6 @@ Basta executar o arquivo `executar. bat`:
 ## 📁 Estrutura do Projeto
 
 ```
-foodly-app/
-├── 📄 app.py                    # Aplicação principal
-├── 📄 requirements.txt          # Dependências
-├── 📄 README.md                 # Documentação
-├── 📄 executar.bat             # Script de inicialização (Windows)
-├── 📄 .gitignore               # Arquivos ignorados pelo Git
-├── 📂 data/                    # Dados do app
-│   ├── produtos.json           # Catálogo de produtos
-│   ├── usuarios.json           # Dados de usuários
-│   └── pedidos.json            # Histórico de pedidos
-├── 📂 assets/                  # Recursos visuais
-│   ├── logo.png               # Logo do app
-│   └── icons/                 # Ícones diversos
-├── 📂 screenshots/            # Capturas de tela
-│   ├── home.png
-│   ├── cart.png
-│   └── tracking.png
-└── 📂 utils/                  # Funções auxiliares
-    ├── auth.py                # Autenticação
-    ├── database.py            # Banco de dados
-    └── calculations.py        # Cálculos (frete, desconto)
 ```
 
 ---
