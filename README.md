@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🍔 FOODLY - App de Delivery Completo
+# 🍔 FOODLY - App de Delivery 
 
 ### Sistema de pedidos online tipo iFood/Uber Eats desenvolvido com Python e Streamlit
 
