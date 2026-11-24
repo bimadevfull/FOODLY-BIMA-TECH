@@ -51,7 +51,7 @@
 ## 🚀 Demo
 
 ### 🌐 Acesse online: 
-**[🔗 foodly-app.streamlit.app](https://foodly-app.streamlit.app)** *(substitua pelo seu link)*
+**[🔗 foodly-app.streamlit.app](https://foodly-app.streamlit.app)** 
 
 ### 💻 Ou rode localmente:
 
